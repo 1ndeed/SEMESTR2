@@ -30,7 +30,9 @@ bool Rectangle::isRectangle() const
     double d13 = p1.distanceTo(p3); 
     double d24 = p2.distanceTo(p4); 
 
-    bool samepoints = !(d12 == 0 || d23 == 0 || d34 == 0 || d41 == 0 || d13==0 || d24==0);
+   
+
+    bool samepoints = !(fabs(d12) < numeric_limits<double>::epsilon() || fabs(d23) < numeric_limits<double>::epsilon() || fabs(d34) < numeric_limits<double>::epsilon() || fabs(d41) < numeric_limits<double>::epsilon() || fabs(d13) < numeric_limits<double>::epsilon() || fabs(d24) < numeric_limits<double>::epsilon());
     
     bool sidesEqual = (fabs(d12 - d34) <numeric_limits<double>::epsilon()) && (fabs(d23 - d41) < numeric_limits<double>::epsilon());
 
