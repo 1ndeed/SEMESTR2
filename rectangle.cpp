@@ -1,4 +1,4 @@
-#define USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
 #define M_PI 3.14159265358979323846
 #include <cmath>
 #include <string>
@@ -10,11 +10,6 @@
 #include "point.h"
 
 using namespace std;
-
-
-Rectangle::Rectangle() : p1(0, 0), p2(0, 1), p3(1, 1), p4(1, 0)
-{
-}
 
 Rectangle::Rectangle(const Point& point1, const Point& point2, const Point& point3, const Point& point4): p1(point1), p2(point2), p3(point3), p4(point4)
 {
@@ -28,8 +23,6 @@ Rectangle::Rectangle(const Point& point1, const Point& point2, const Point& poin
 
 bool Rectangle::isRectangle() const
 {
-  ;
-
     double d12 = p1.distanceTo(p2);
     double d23 = p2.distanceTo(p3);
     double d34 = p3.distanceTo(p4);
@@ -37,12 +30,13 @@ bool Rectangle::isRectangle() const
     double d13 = p1.distanceTo(p3); 
     double d24 = p2.distanceTo(p4); 
 
+    bool samepoints = !(d12 == 0 || d23 == 0 || d34 == 0 || d41 == 0 || d13==0 || d24==0);
     
     bool sidesEqual = (fabs(d12 - d34) <numeric_limits<double>::epsilon()) && (fabs(d23 - d41) < numeric_limits<double>::epsilon());
 
     bool diagonalsEqual = (fabs(d13 - d24) < numeric_limits<double>::epsilon());
 
-    return sidesEqual && diagonalsEqual;
+    return sidesEqual && diagonalsEqual && samepoints;
 }
 
 void Rectangle::sortPoints()
