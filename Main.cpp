@@ -1,11 +1,13 @@
-
 #include <iostream>
 #include <vector>
 #include <memory>
 #include "Square.h"
 #include <clocale>
-
-int main() {
+/**
+* @brief точка входа в программу
+* @return 0, если программа выполнена успешно
+*/
+int main(void) {
     setlocale(LC_ALL, "Russian");
     try {
         std::cout << "=== Демонстрация работы с классами Polygon и Square ===\n\n";
