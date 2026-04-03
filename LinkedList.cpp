@@ -2,7 +2,11 @@
 #include <stdexcept>
 
 namespace containers {
-
+    template<typename T>
+    std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
+        os << list.ToString();
+        return os;
+    }
     template<typename T>
     void LinkedList<T>::copyFrom(const LinkedList<T>& other) {
         Node<T>* current = other.head;
@@ -26,7 +30,7 @@ namespace containers {
     LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
 
     template<typename T>
-    LinkedList<T>::LinkedList(std::initializer_list<T> init) : head(nullptr), size(0) {
+    LinkedList<T>::LinkedList(const std::initializer_list<T> init) : head(nullptr), size(0) {
         for (const auto& value : init) {
             push_back(value);
         }
@@ -43,7 +47,7 @@ namespace containers {
     }
 
     template<typename T>
-    LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
+    LinkedList<T>& const LinkedList<T>::operator=(const LinkedList<T>& other) {
         if (this != &other) {
             clear();
             copyFrom(other);
