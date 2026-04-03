@@ -14,7 +14,7 @@ namespace containers {
     template<typename T>
     class LinkedList {
     private:
-        Node<T>* head;
+        Node<T>& head;
         size_t size;
 
         /**
@@ -38,13 +38,13 @@ namespace containers {
          * @brief Конструктор со списком инициализации
          * @param init - список инициализации
          */
-        LinkedList(std::initializer_list<T> init);
+        LinkedList(const std::initializer_list init);
 
         /**
          * @brief Конструктор копирования
          * @param other - другой список
          */
-        LinkedList(const LinkedList<T>& other);
+        LinkedList(const LinkedList&& other);
 
         /**
          * @brief Деструктор
@@ -56,7 +56,7 @@ namespace containers {
          * @param other - другой список
          * @return ссылка на текущий объект
          */
-        LinkedList<T>& operator=(const LinkedList<T>& other);
+        LinkedList& operator=(const LinkedList&& other);
 
         /**
          * @brief Вставка элемента в конец списка
@@ -75,7 +75,7 @@ namespace containers {
          * @param index - позиция для вставки
          * @param value - значение элемента
          */
-        void insert(size_t index, const T& value);
+        void insert(const size_t index, const T& value);
 
         /**
          * @brief Удаление элемента из конца списка
@@ -91,7 +91,7 @@ namespace containers {
          * @brief Удаление элемента по индексу
          * @param index - позиция элемента
          */
-        void erase(size_t index);
+        void erase(const size_t index);
 
         /**
          * @brief Удаление элемента по значению (первое вхождение)
@@ -112,21 +112,21 @@ namespace containers {
          * @param index - позиция элемента
          * @param value - новое значение
          */
-        void modify(size_t index, const T& value);
+        void modify(const size_t index, const T& value);
 
         /**
          * @brief Получение элемента по индексу
          * @param index - позиция элемента
          * @return ссылка на элемент
          */
-        T& operator[](size_t index);
+        T& operator[](const size_t index);
 
         /**
          * @brief Получение элемента по индексу (константная версия)
          * @param index - позиция элемента
          * @return константная ссылка на элемент
          */
-        const T& operator[](size_t index) const;
+        const T& operator[](const size_t index) const;
 
         /**
          * @brief Получение размера списка
@@ -154,10 +154,8 @@ namespace containers {
         /**
          * @brief Оператор вывода
          */
-        friend std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
-            os << list.ToString();
-            return os;
-        }
+        template<typename T>
+        std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list);
     };
 
 } 
